@@ -101,10 +101,10 @@ builder.Services.AddRateLimiter(_ => _
 	}).RejectionStatusCode = 429);
   ```
   * The above code will call the ```AddRateLimiter``` to add a rate limiting service to the service collection and will further call ```AddTokenBucketLimiter``` method to create a concurrent limiter with a policy name of "concurrent" and will set the following options:<br><br>
-  a. TokenLimit: Maximum number of tokens that can be in the bucket at any time.
-  b. ReplenishmentPeriod: Specifies the minimum period between the replenishments.
-  c. AutoRelenishment: Specifies whether someone will be calling TryReplenish() to replenish tokens or the TokenBucketRateLimiter is automatically replenishing         tokens.
-  d. TokenPerPeriod: For each replenishment, Specifies the maximum number of tokens to restore.
+  a. TokenLimit: Maximum number of tokens that can be in the bucket at any time.<br>
+  b. ReplenishmentPeriod: Specifies the minimum period between the replenishments.<br>
+  c. AutoRelenishment: Specifies whether someone will be calling TryReplenish() to replenish tokens or the TokenBucketRateLimiter is automatically replenishing         tokens.<br>
+  d. TokenPerPeriod: For each replenishment, Specifies the maximum number of tokens to restore.<br>
   e.QueueProcessingOrder: Determine the order in which requests are processed from a waiting queue<br>
   f. QueueLimit: Sets the maximum number of requests that can be queued while waiting to be processed.<br><br>
 * Now, add ```app.UseRateLimiter()``` in program.cs file to enable rate limiting.
