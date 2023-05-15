@@ -1,5 +1,5 @@
-# Rate Limiting
-### Why Rate Limiting came into picture?
+# Rate Limiting:balance_scale:
+### Why Rate Limiting came into picture?:thinking:
 Users could use up resources in a way that affects others, whether accidentally or on purpose. The server may run out of resources if numerous requests are made for those resources over an extended period of time. Memory, threads, connections, and other finite resources are examples of these resources.To avoid this issue, rate limiter came into picture.
 ### What is Rate Limiting?
 Rate limiting is a technique used to control the rate at which a client can send requests to a server. It is often used to prevent abuse, such as a denial-of-service attack or brute-force attack, and to ensure fair usage of a shared resource.
@@ -9,7 +9,7 @@ Rate limiting is a technique used to control the rate at which a client can send
 * It helps us manage server resources efficiently when a high volume of requests is received.
 * Rate limiting helps to improve the performance of our application by reducing unnecessary delays in sending back responses.
 * Rate-limiting reduces costs.
-## Implementation
+## :sparkles:Implementation
 * The ```Microsoft.AspNetCore.RateLimiting``` middleware provides rate limiting middleware.So, we need to add it to the application
 ``` 
 app.UseRateLimiter();
@@ -19,7 +19,7 @@ a. Fixed window<br>
 b. Sliding window<br>
 c. Concurrency<br>
 d. Token bucket<br>
-### Fixed Window Limiter
+### Fixed Window Limiter:hourglass_flowing_sand:
 * A fixed window rate limiter is a common technique used to limit the number of requests or events that can be processed within a certain time window. 
 * The basic idea is to keep track of the number of requests made during the current time window, and reject any requests that exceed a predefined limit.
 * When the time window expires, a new time window starts and the request limit is reset.
@@ -41,7 +41,7 @@ builder.Services.AddRateLimiter(_ => _
   d. QueueLimit: Sets the maximum number of requests that can be queued while waiting to be processed.<br><br>
 * Now, add ```app.UseRateLimiter()``` in program.cs file to enable rate limiting
 * Apply the rate limiter with the help of ```EnableRateLimiting``` attribute on controller level or at any endpoint.
-### Sliding Window Limiter
+### Sliding Window Limiter :traffic
 * A sliding window rate limiter is a technique used to limit the rate of requests over a sliding time window. 
 * In contrast to a fixed window rate limiter, which counts requests within a fixed time interval, a sliding window rate limiter counts requests over a sliding time interval.
 * Simply, It adds segments per window. The window slides one segment for each segment interval.
@@ -90,7 +90,7 @@ builder.Services.AddRateLimiter(_ => _
 * To enable the sliding window limiter, inject the following ```AddRateLimiter``` service in the ```program.cs``` class.
 ```
 builder.Services.AddRateLimiter(_ => _
-	.AddTokenBucketLimiter(policyName: "fixed", options =>
+	.AddTokenBucketLimiter(policyName: "token", options =>
 	{
 		options.TokenLimit = 10;
 		options.ReplenishmentPeriod=TimeSpan.FromSeconds(10);
@@ -100,7 +100,7 @@ builder.Services.AddRateLimiter(_ => _
 		options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
 	}).RejectionStatusCode = 429);
   ```
-  * The above code will call the ```AddRateLimiter``` to add a rate limiting service to the service collection and will further call ```AddTokenBucketLimiter``` method to create a concurrent limiter with a policy name of "concurrent" and will set the following options:<br><br>
+  * The above code will call the ```AddRateLimiter``` to add a rate limiting service to the service collection and will further call ```AddTokenBucketLimiter``` method to create a concurrent limiter with a policy name of "token" and will set the following options:<br><br>
   a. TokenLimit: Maximum number of tokens that can be in the bucket at any time.<br>
   b. ReplenishmentPeriod: Specifies the minimum period between the replenishments.<br>
   c. AutoRelenishment: Specifies whether someone will be calling TryReplenish() to replenish tokens or the TokenBucketRateLimiter is automatically replenishing         tokens.<br>
